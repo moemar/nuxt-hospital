@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # nuxt-hospital
 
 > My scrumtrulescent Nuxt.js project
@@ -21,6 +20,3 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-=======
-# nuxt-hospital
->>>>>>> 2c1bd65e23c2b2e8192a2ee005d6047a994d6d9d
