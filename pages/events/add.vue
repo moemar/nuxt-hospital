@@ -49,8 +49,6 @@
 </template>
 
 <script>
-import hospitals from '~/apollo/queries/allHospitals'
-
 export default {
   data: () => ({
     valid: true,
@@ -62,13 +60,6 @@ export default {
     events: ['Fødsel', 'Brudd', 'Akutt skade', 'Psykisk', 'Annet'],
     hospitals: ['Elverum', 'Tynset', 'Hamar', 'Lillehammer', 'Gjøvik', 'Other']
   }),
-  apollo: {
-    hospitals: {
-      prefetch: true,
-      query: hospitals
-    },
-    getAuth: () => 'fnADjirFtSACAqMDxZ-GCfuMv1_-0bKRX7CldLLy'
-  },
   methods: {
     addEvent() {
       const event = {

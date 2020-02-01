@@ -1,7 +1,0 @@
-query FindAllHospitals {
-  allHospitals {
-  	data {
-      name
-    }
-  }
-}
