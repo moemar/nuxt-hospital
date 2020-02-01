@@ -3,7 +3,9 @@
     <v-app-bar color="deep-purple accent-4" dense dark fixed>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title>
+        <nuxt-link to="/" class="no-link-styling">{{ title }}</nuxt-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -39,6 +41,13 @@
     </v-footer>
   </v-app>
 </template>
+
+<style>
+.no-link-styling {
+  text-decoration: none;
+  color: white !important;
+}
+</style>
 
 <script>
 export default {

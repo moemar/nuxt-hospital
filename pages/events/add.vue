@@ -1,47 +1,47 @@
 <template>
   <v-row align="center" justify="center">
     <v-col class="text-center" cols="12" sm="8" md="4">
-      <h1>Add Event</h1>
+      <h1>Legg til hendelse</h1>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-select
           v-model="event"
           :items="events"
-          :rules="[(v) => !!v || 'Event is required']"
-          label="Event"
+          :rules="[(v) => !!v || 'Hendelse er påkrevet']"
+          label="Hendelse"
           required
         ></v-select>
         <v-text-field
-          v-model="eventAddress"
-          label="Event address"
+          v-model="eventZip"
+          label="Postnummeret der jeg bor"
           required
         ></v-text-field>
         <v-select
           v-model="treatedAt"
           :items="hospitals"
-          :rules="[(v) => !!v || 'Hospital is required']"
-          label="I was treated at"
+          :rules="[(v) => !!v || 'Sykehus er påkrevet']"
+          label="Jeg ble behandlet på sykehuset i"
           required
         ></v-select>
         <v-checkbox
           v-model="wasPreferredHospital"
-          label="This was my preferred hospital"
+          label="Ja, dette var mitt foretrukne sykehus"
         ></v-checkbox>
         <v-select
           v-show="!wasPreferredHospital"
           v-model="preferredTreatedAt"
           :items="hospitals"
-          :rules="[(v) => !!v || 'Hospital is required']"
-          label="I preferred being treated at"
+          :rules="[(v) => !!v || 'Sykehus er påkrevet']"
+          label="Jeg ønsket å bli behandlet på sykehuset i"
           required
         ></v-select>
-        <v-btn @click="reset" color="error" class="mr-4">Reset Form</v-btn>
+        <v-btn @click="reset" color="error" class="mr-4">Tøm skjema</v-btn>
         <v-btn
           :disabled="!valid"
           @click="addEvent"
           color="success"
           class="mr-4"
         >
-          Add Event
+          Registrer hendelse
         </v-btn>
       </v-form>
     </v-col>
@@ -53,11 +53,11 @@ export default {
   data: () => ({
     valid: true,
     event: null,
-    eventAddress: '',
+    eventZip: '',
     treatedAt: null,
     wasPreferredHospital: true,
     preferredTreatedAt: null,
-    events: ['Birth', 'Heart Attack', 'Stroke', 'Other'],
+    events: ['Fødsel', 'Brudd', 'Akutt skade', 'Psykisk', 'Annet'],
     hospitals: ['Elverum', 'Tynset', 'Hamar', 'Lillehammer', 'Gjøvik', 'Other']
   }),
 
@@ -78,6 +78,7 @@ export default {
     },
     reset() {
       this.$refs.form.reset()
+      this.wasPreferredHospital = true
     },
     resetValidation() {
       this.$refs.form.resetValidation()
