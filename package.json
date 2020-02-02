@@ -17,6 +17,7 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "faunadb": "^2.11.1",
     "graphql-tag": "^2.10.1",
+    "netlify-cli": "^2.31.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {

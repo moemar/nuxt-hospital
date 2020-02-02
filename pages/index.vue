@@ -20,24 +20,11 @@
 export default {
   data() {
     return {
-      hospitals: [],
-      error: null
+      hospitals: this.$store.state.hospitals.list
     }
   },
   created() {
-    this.hospitals = this.getAllHospitals()
-  },
-  methods: {
-    async getAllHospitals() {
-      try {
-        const res = await this.$axios.$get('/.netlify/functions/get')
-        this.hospitals = res
-        this.error = null
-      } catch (e) {
-        this.error = e.response
-        this.hospitals = []
-      }
-    }
+    this.$store.dispatch('hospitals/get')
   }
 }
 </script>
