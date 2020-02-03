@@ -11,11 +11,11 @@ exports.handler = async (event, context) => {
   // const data = JSON.parse(event.body)
   const eventItem = {
     data: {
-      eventType: { connect: '256362432517112320' },
+      eventType: q.Ref(q.Collection('EventType'), '256362432517112320'),
       zip: '2410',
-      treatedAt: { connect: '256208847065055763' },
-      wasPreferredHospital: false,
-      preferredTreatedAt: { connect: '256205308859253267' }
+      preferredTreatedAt: q.Ref(q.Collection('Hospital'), '256208847065055763'),
+      wasPreferredHospital: true,
+      treatedAt: q.Ref(q.Collection('Hospital'), '256208847065055763')
     }
   }
 
