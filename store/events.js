@@ -26,11 +26,13 @@ export const actions = {
       }
     })
   },
-  async set({ commit }) {
-    await this.$axios.get('/.netlify/functions/createEvent').then((res) => {
-      if (res.status === 200) {
-        // commit('set', res.data)
-      }
-    })
+  async set({ commit }, event) {
+    await this.$axios
+      .post('/.netlify/functions/createEvent', event)
+      .then((res) => {
+        if (res.status === 200) {
+          // commit('set', res.data)
+        }
+      })
   }
 }

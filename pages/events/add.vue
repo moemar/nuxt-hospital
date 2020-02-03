@@ -4,15 +4,16 @@
       <h1>Legg til hendelse</h1>
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-select
-          v-model="event"
+          v-model="eventType"
           :items="eventTypes"
           :rules="[(v) => !!v || 'Hendelse er påkrevet']"
           item-text="data.name"
+          item-value="ref.@ref.id"
           label="Hendelse"
           required
         ></v-select>
         <v-text-field
-          v-model="eventZip"
+          v-model="zip"
           label="Postnummeret der jeg bor"
           required
         ></v-text-field>
@@ -21,6 +22,7 @@
           :items="hospitals"
           :rules="[(v) => !!v || 'Sykehus er påkrevet']"
           item-text="data.name"
+          item-value="ref.@ref.id"
           label="Jeg ble behandlet på sykehuset i"
           required
         ></v-select>
@@ -34,6 +36,7 @@
           :items="hospitals"
           :rules="[(v) => !!v || 'Sykehus er påkrevet']"
           item-text="data.name"
+          item-value="ref.@ref.id"
           label="Jeg ønsket å bli behandlet på sykehuset i"
           required
         ></v-select>
@@ -55,13 +58,11 @@
 export default {
   data: () => ({
     valid: true,
-    event: null,
-    eventZip: '',
+    eventType: null,
+    zip: '',
     treatedAt: null,
     wasPreferredHospital: true,
     preferredTreatedAt: null
-    // eventTypes: ['Fødsel', 'Brudd', 'Akutt skade', 'Psykisk', 'Annet'],
-    // hospitals: ['Elverum', 'Tynset', 'Hamar', 'Lillehammer', 'Gjøvik', 'Other']
   }),
   computed: {
     hospitals() {
@@ -77,13 +78,17 @@ export default {
   },
   methods: {
     addEvent() {
-      // const event = {
-      //   event: this.event,
-      //   treatedAt: this.treatedAt
-      // }
+      const event = {
+        eventType: this.eventType,
+        zip: this.zip,
+        treatedAt: this.treatedAt,
+        wasPreferredHospital: this.wasPreferredHospital,
+        preferredTreatedAt: this.wasPreferredHospital
+          ? this.treatedAt
+          : this.preferredTreatedAt
+      }
 
-      // this.$store.commit('events/add', event)
-      this.$store.dispatch('events/set')
+      this.$store.dispatch('events/set', event)
       this.reset()
     },
     validate() {
