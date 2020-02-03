@@ -5,8 +5,9 @@
       <v-form ref="form" v-model="valid" lazy-validation>
         <v-select
           v-model="event"
-          :items="events"
+          :items="eventTypes"
           :rules="[(v) => !!v || 'Hendelse er påkrevet']"
+          item-text="data.name"
           label="Hendelse"
           required
         ></v-select>
@@ -19,6 +20,7 @@
           v-model="treatedAt"
           :items="hospitals"
           :rules="[(v) => !!v || 'Sykehus er påkrevet']"
+          item-text="data.name"
           label="Jeg ble behandlet på sykehuset i"
           required
         ></v-select>
@@ -31,6 +33,7 @@
           v-model="preferredTreatedAt"
           :items="hospitals"
           :rules="[(v) => !!v || 'Sykehus er påkrevet']"
+          item-text="data.name"
           label="Jeg ønsket å bli behandlet på sykehuset i"
           required
         ></v-select>
@@ -56,18 +59,31 @@ export default {
     eventZip: '',
     treatedAt: null,
     wasPreferredHospital: true,
-    preferredTreatedAt: null,
-    events: ['Fødsel', 'Brudd', 'Akutt skade', 'Psykisk', 'Annet'],
-    hospitals: ['Elverum', 'Tynset', 'Hamar', 'Lillehammer', 'Gjøvik', 'Other']
+    preferredTreatedAt: null
+    // eventTypes: ['Fødsel', 'Brudd', 'Akutt skade', 'Psykisk', 'Annet'],
+    // hospitals: ['Elverum', 'Tynset', 'Hamar', 'Lillehammer', 'Gjøvik', 'Other']
   }),
+  computed: {
+    hospitals() {
+      return this.$store.state.hospitals.list
+    },
+    eventTypes() {
+      return this.$store.state.eventTypes.list
+    }
+  },
+  created() {
+    this.$store.dispatch('hospitals/get')
+    this.$store.dispatch('eventTypes/get')
+  },
   methods: {
     addEvent() {
-      const event = {
-        event: this.event,
-        treatedAt: this.treatedAt
-      }
+      // const event = {
+      //   event: this.event,
+      //   treatedAt: this.treatedAt
+      // }
 
-      this.$store.commit('events/add', event)
+      // this.$store.commit('events/add', event)
+      this.$store.dispatch('events/set')
       this.reset()
     },
     validate() {
