@@ -10,11 +10,13 @@ const client = new faunadb.Client({
 exports.handler = async (event, context) => {
   // const data = JSON.parse(event.body)
   const eventItem = {
-    eventType: { connect: '256362432517112320' },
-    zip: '2410',
-    treatedAt: { connect: '256208847065055763' },
-    wasPreferredHospital: false,
-    preferredTreatedAt: { connect: '256205308859253267' }
+    data: {
+      eventType: { connect: '256362432517112320' },
+      zip: '2410',
+      treatedAt: { connect: '256208847065055763' },
+      wasPreferredHospital: false,
+      preferredTreatedAt: { connect: '256205308859253267' }
+    }
   }
 
   return client
