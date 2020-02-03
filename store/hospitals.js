@@ -20,7 +20,7 @@ export const mutations = {
 
 export const actions = {
   async get({ commit }) {
-    await this.$axios.get('/.netlify/functions/get').then((res) => {
+    await this.$axios.get('/.netlify/functions/allHospitals').then((res) => {
       if (res.status === 200) {
         commit('set', res.data)
       }

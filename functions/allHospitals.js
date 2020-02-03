@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // https://github.com/netlify/netlify-faunadb-example
 /* Import faunaDB sdk */
 const faunadb = require('faunadb')
@@ -8,13 +9,10 @@ const client = new faunadb.Client({
 })
 
 exports.handler = (event, context) => {
-  console.log('Function `hospitals-get-all` invoked')
   return client
     .query(q.Paginate(q.Match(q.Ref('indexes/allHospitals'))))
     .then((response) => {
       const hospitalRefs = response.data
-      console.log('Hospital refs', hospitalRefs)
-      console.log(`${hospitalRefs.length} hospitals found`)
       const getAllHospitalsDataQuery = hospitalRefs.map((ref) => {
         return q.Get(ref)
       })
@@ -27,7 +25,6 @@ exports.handler = (event, context) => {
       })
     })
     .catch((error) => {
-      console.log('error', error)
       return {
         statusCode: 400,
         body: JSON.stringify(error)

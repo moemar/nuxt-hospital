@@ -18,13 +18,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      hospitals: this.$store.state.hospitals.list
+  computed: {
+    hospitals() {
+      return this.$store.state.hospitals.list
     }
   },
   created() {
-    this.$store.dispatch('hospitals/get')
+    if (!Array.isArray(this.hospitals) || !this.hospitals.length)
+      this.$store.dispatch('hospitals/get')
   }
 }
 </script>
